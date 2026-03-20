@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: bimigration
+      POSTGRES_PASSWORD: bimigration123
+      POSTGRES_DB: bimigrationdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - chromadb_data:/chroma/chroma
+
+volumes:
+  postgres_data:
+  chromadb_data:

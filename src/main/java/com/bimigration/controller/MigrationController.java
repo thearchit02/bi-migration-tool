@@ -1,5 +1,6 @@
 package com.bimigration.controller;
 
+import com.bimigration.exception.MigrationException;
 import com.bimigration.model.MigrationJob;
 import com.bimigration.service.MigrationJobService;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,10 @@ public class MigrationController {
     @GetMapping("/jobs")
     public List<MigrationJob> getAllJobs() {
         return migrationJobService.getAllJobs();
+    }
+
+    @GetMapping("/test-error")
+    public String testError() {
+        throw new MigrationException("TEST_ERROR", "This is a test error message");
     }
 }
